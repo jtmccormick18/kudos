@@ -1,0 +1,29 @@
+{
+  "name": "kudos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtmccormick18/kudos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jtmccormick18/kudos/issues"
+  },
+  "homepage": "https://github.com/jtmccormick18/kudos#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.12",
+    "mongoose-type-email": "^1.0.9",
+    "nodemon": "^1.18.6",
+    "path": "^0.12.7"
+  }
+}
