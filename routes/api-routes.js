@@ -36,13 +36,15 @@ module.exports = function (app) {
             body: req.body.body
         })
             .then(function (data) {
-                return Users.updateMany(({ _id: req.body.getter_id} || {_id: req.body.sender_id }),
+                return Users.update({$or:
+                    [{ _id: req.body.getter_id},{_id:req.body.sender_id}]
+                }),
                     {
                         $push: {
                             kudos: data._id
                         }
 
-                    })
+                    }
             })
             .then(function (data) {
                 console.log(data)
