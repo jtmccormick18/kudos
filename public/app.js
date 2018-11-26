@@ -38,11 +38,15 @@ $(function () {
         }).then(function (users) {
             $('#kudo-sender').empty();
             $('#kudo-getter').empty();
-            $('#kudo-sender').append(`<option selected="" disabled="" value="">Select Sender</option>`) 
-            $('#kudo-getter').append(`<option selected="" disabled="" value="">Select Reciever</option>`) 
+            $('#kudo-sender').append(`<option selected="" disabled="" value="">Select Sender</option>`); 
+            $('#kudo-getter').append(`<option selected="" disabled="" value="">Select Reciever</option>`);
             for (let i = 0; i < users.length; i++) {
-                $('#kudo-sender').append(`<option data-val="${users[i]._id}" value="${users[i].name}">${users[i].name}</option>`);
-                $('#kudo-getter').append(`<option data-val="${users[i]._id}" value="${users[i].name}">${users[i].name}</option>`)
+                var sender=$(`<option value="${users[i].name}">${users[i].name}</option>`);
+            var getter=$(`<option value="${users[i].name}">${users[i].name}</option>`)
+                sender.appendTo('#kudo-sender');
+                getter.appendTo('#kudo-getter');
+                getter.attr('data-val',`${users[i]._id}`);
+                sender.attr('data-val',`${users[i]._id}`);
             }
 
         }).then(function () {
@@ -53,13 +57,14 @@ $(function () {
     const sendKudos = function () {
         
         const Kudo = {
-            // sender_id: $('#kudo-sender').data('val'),
-            // getter_id: $('#kudo-getter').data('val'),
+            sender_id: $('#kudo-sender').data('val'),
+            getter_id: $('#kudo-getter').data('val'),
             sender_name: $('#kudo-sender').val(),
             receiver_name: $('#kudo-getter').val(),
             title: $('#kudo-title').val().trim(),
             body: $('#kudo-body').val().trim()
         };
+        console.log(Kudo);
         if ($('#kudo-sender').val() && $('#kudo-getter').val() && $('#kudo-title').val() && $('#kudo-body').val()) {
             $.ajax({
                 method: 'POST',
@@ -92,5 +97,14 @@ $(function () {
         $('#userCreate').toggleClass('invisible');
     });
     $('#userAuth').on('click', addUser);
+    $('#kudo-sender').change(function(){
+        $('#kudo-sender').attr('data-val',$(this.options[this.selectedIndex]).data('val'))
+        console.log($('#kudo-sender').data('val'))
+    })
+    $('#kudo-getter').change(function(){
+        $('#kudo-getter').attr('data-val',$(this.options[this.selectedIndex]).data('val'))
+        console.log($('#kudo-getter').data('val'))
+    })
+
 
 })
